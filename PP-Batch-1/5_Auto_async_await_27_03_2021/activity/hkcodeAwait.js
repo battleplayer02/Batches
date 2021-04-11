@@ -1,5 +1,8 @@
 let puppeteer = require("puppeteer");
-let { password, email } = require("../../../secrets");
+let { password, email } = {
+    elail:"hshekhar499@gmail.com", 
+    password:"123456"
+};
 let { codes } = require("./code");
 let fs = require("fs");
 console.log("Before");
