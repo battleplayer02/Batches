@@ -1,6 +1,6 @@
 let puppeteer = require("puppeteer");
 let { password, email } = {
-    elail:"hshekhar499@gmail.com", 
+    email:"hshekhar499@gmail.com", 
     password:"123456"
 };
 let { codes } = require("./code");
