@@ -1,6 +1,7 @@
 /* basic */
 *{
     box-sizing: border-box;
+    word-break: break-all;
 }
 body{
     margin:0px;
@@ -18,7 +19,6 @@ body{
 .black{
     background-color: black;
 }
-
 /* toolbar*********************************************/
 .toolbar{
     /* 1. toolbar height  */
@@ -80,17 +80,27 @@ border-radius:2px;
 .fas{
     font-size:x-large;
 }
-.active{
+.fa{
+    font-size: xx-large;
+}
+
+.action-container__icons:hover{
+    background-color: rgb(100, 71, 26);
     
 }
 /* main container css**************************** */
 .main-container{
     /* border:5px solid green; */
 /*  task add 2 */
+border: 5px solid green; 
     min-height: 88vh;
     background-color: rgb(240, 239, 239);
-    padding: 2rem ;
-    display:flex;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    /* align-content: stretch; */
+    justify-content: space-around;
+    gap: 2vw;
 }
 .modal_container{
     
@@ -133,7 +143,7 @@ width:60%;
 height: 12%;
 }
 .border{
-    border:2px solid white;light
+    border:2px solid white;
 }
 
 .ticket-container{
@@ -147,17 +157,39 @@ height:8%;
 /* background-color:black; */
 }
 .ticket_sub-container{
+    height:92%;
     padding-left:1rem;
     font-family: sans-serif;
 }
 .ticket-id{
-    color:lightslategray;
+    height: 3%;
 }
+
 .ticket-desc{
     text-align: center;
     height: 70%;
+    overflow: auto;
     
 }
 
+@media only screen and (max-width: 500px){
+    .toolbar{
+        gap: 3rem;
+    }
+    .filter-container {
+        height: 70%;
+        width: 42%;
+    }
+    .action-container {
+        height: 70%;
+        width: 20%;}
+
+        .modal_container{
+    top: 25vh;
+    height: 15rem;
+    width: 20rem;
+    left: calc((100vw - 20rem)/2);
+        }
+}
 
 
