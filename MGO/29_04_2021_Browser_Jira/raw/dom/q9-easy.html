@@ -700,32 +700,32 @@
   </p>
   <script>
     // Q Implement key taps such that on pressing 1 you scroll to section 1,  pressing 2 you scroll to section 2 and  pressing 3 you scroll to section 3. Also implement key tap b to go to bottom of the page and key tap t to go to top of the page
-    document.addEventListener("keydown", onkeyDown);
     let s1 = document.querySelector("#s1");
     let s2 = document.querySelector("#s2");
     let s3 = document.querySelector("#s3");
-    function onkeyDown(e) {
+    document.addEventListener("keydown", function (e) {
+      // alert(e.key);
       if (e.key == "1") {
         s1.scrollIntoView();
-      } else if (e.key == "2") {
+      }
+      else if (e.key == "2") {
         s2.scrollIntoView();
       } else if (e.key == "3") {
         s3.scrollIntoView();
-      }
-      else if (e.key == "t") {
-        window.scrollTo(0, 0);
+      } else if (e.key == "t") {
         // document.body.scrollIntoView(true);
+        //  coordinate (x,y);
+        window.scrollTo(0, 0);
       } else if (e.key == "b") {
-        //  top left  height width
-        // eleme -> coordinates , height . width
-        // element -> height 
         let obj = document.body.getBoundingClientRect();
-        // console.log(obj);
-        window.scrollTo(0, obj.height);
+        console.log(obj);
+        let pageHeight = obj.height;
+        window.scrollTo(0, pageHeight);
         // document.body.scrollIntoView(false);
-      }
-    }
 
+
+      }
+    })
   </script>
 </body>
 

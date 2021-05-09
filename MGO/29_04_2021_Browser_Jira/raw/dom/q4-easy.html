@@ -21,14 +21,13 @@
     <li>10</li>
   </ul>
   <script>
-    // Q fix the list by making it go from 1 
-    // to 10. Use only querySelectorAll,createElement 
-    // and insertBefore
-    let lisArr = document.querySelectorAll("li");
-    let newlLi = document.createElement("li");
-    newlLi.innerText = 7;
+    // Q fix the list by making it go from 1 to 10. Use only querySelectorAll, createElement and insertBefore
+    let allLis = document.querySelectorAll("li");
     let ul = document.querySelector("ul");
-    ul.insertBefore(newlLi, lisArr[6]);
+    let li = document.createElement("li");
+    li.innerText = 7;
+    // dom tree add
+    ul.insertBefore(li,allLis[6]);
   </script>
 </body>
 

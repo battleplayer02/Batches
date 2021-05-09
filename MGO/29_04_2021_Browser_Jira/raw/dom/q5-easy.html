@@ -108,32 +108,31 @@
   </div>
   <script>
     // Q Make the filter work
+    // display none vs opacity 0 
     let select = document.querySelector("select");
-//  select -> change
     select.addEventListener("change", function () {
-      // alert(select.value);
       let cType = select.value;
-      let movies = document
-      .querySelectorAll(".movies");
+      let allMovies = document.querySelectorAll(".movies");
       if (cType == "none") {
-        for (let i = 0; i < movies.length; i++) {
-          movies[i].style.display = "block";
+        for (let i = 0; i < allMovies.length; i++) {
+          allMovies[i].style.display = "block";
         }
-      } 
-      else {
-        for (let i = 0; i < movies.length; i++) {
-          let p = movies[i].children[1];
-          let type = p
-          .getAttribute("data-category");
-          if (type != cType) {
-            movies[i].style.display = "none";
+      } else {
+        for (let i = 0; i < allMovies.length; i++) {
+          let pTag = allMovies[i].children[1];
+          let dataCategory = pTag.getAttribute("data-category");
+          if (dataCategory != cType) {
+            // allMovies[i].style.opacity = 0;
+            allMovies[i].style.display = "none";
           } else {
-            movies[i].style.display = "block";
+            // allMovies[i].style.opacity = 1;
+            allMovies[i].style.display = "block";
           }
         }
       }
-    })
 
+
+    })
   </script>
 </body>
 

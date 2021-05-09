@@ -1,4 +1,5 @@
 // let a=10;
+// script -> grid
 let topRow = document.querySelector(".top-row");
 let str = "";
 for (let i = 0; i < 26; i++) {
@@ -22,3 +23,33 @@ for (let i = 0; i < 100; i++) {
     str += "</div>";
 }
 grid.innerHTML = str;
+// initial load
+
+workSheetDB = [];
+function initCurrentSheetDb() {
+    let sheetDB = [];
+    for (let i = 0; i < 100; i++) {
+        let row = [];
+        for (let j = 0; j < 26; j++) {
+            let cell = {
+                bold: false,
+                italic: "normal",
+                underline: "none",
+                fontFamily: "Arial",
+                fontSize: "10",
+                halign: "left",
+                value: ""
+            }
+
+            row.push(cell);
+        }
+        sheetDB.push(row);
+    }
+    console.log(sheetDB);
+    workSheetDB.push(sheetDB);
+    console.log(workSheetDB);
+}
+initCurrentSheetDb();
+
+//  2 d Array-> styling prop
+//  cell set 
