@@ -17,17 +17,35 @@ for (let i = 1; i <= rows; i++) {
     div.setAttribute("class", "block");
     leftCol.appendChild(div);
 }
+let sheetArr = [];
 // rows-> 100
 // col - > 26
 for (let i = 0; i < rows; i++) {
     let row = document.createElement("div");
+    let rowArr = [];
     row.setAttribute("class", "row");
     for (let j = 0; j < columns; j++) {
-        let col = document.createElement("div");
-        col.innerText =
-            `${i} ${String.fromCharCode(65 + j)}`;
-        col.setAttribute("class", "cell");
-        row.appendChild(col);
+        // UI
+        let cell = document.createElement("div");
+        cell.setAttribute("class", "cell");
+        cell.setAttribute("rid", i);
+        cell.setAttribute("cid", j);
+        cell.setAttribute("contenteditable", "true");
+        row.appendChild(cell);
+        // 
+        let cellObj = {
+            isBold: false,
+            isItalic: false,
+            isUnderline: false,
+            fontFamily: "sans-serif",
+            fontSize: 16,
+            color: "black",
+            bgColor: "",
+            halign:"center"
+        }
+        rowArr.push(cellObj);
     }
     grid.appendChild(row);
+    sheetArr.push(rowArr);
 }
+console.log(sheetArr)
