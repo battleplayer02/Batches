@@ -1,19 +1,15 @@
 import React, { Component } from 'react'
-import { getMovies } from '../temp/MovieService'
+import { getMovies } from '../temp/MovieService';
+import List from "./List.jsx";
+import Pagination from "./Pagination.jsx";
+import { Link } from "react-router-dom";
 export default class MoviesPage extends Component {
     state = {
-        movies: [],
+        genres: [{ id: 1, name: "All Genres" }],
         currSearchText: "",
         limit: 4,
-        currentPage: 1
-    }
-    deleteEntry = (id) => {
-        let filtereMovies = this.state.movies.filter((movieObj) => {
-            return movieObj._id != id;
-        })
-        this.setState({
-            movies: filtereMovies
-        })
+        currentPage: 1,
+        cGenre: "All Genres"
     }
     setCurrentText = (e) => {
         let task = e.target.value;
@@ -25,7 +21,7 @@ export default class MoviesPage extends Component {
     sortByRatings = (e) => {
         let className = e.target.className;
         let sortedMovies;
-        let { movies } = this.state;
+        let { movies } = this.props;
         if (className == "fas fa-sort-up") {
             sortedMovies = movies.sort((movieObjA, movieObjB) => {
                 return movieObjA.dailyRentalRate - movieObjB.dailyRentalRate;
@@ -35,14 +31,12 @@ export default class MoviesPage extends Component {
                 return movieObjB.dailyRentalRate - movieObjA.dailyRentalRate;
             });
         }
-        this.setState({
-            movies: sortedMovies
-        })
+        this.props.setMovies(sortedMovies);
     }
     sortByStock = (e) => {
         let className = e.target.className.trim();
         let sortedMovies;
-        let { movies } = this.state;
+        let { movies } = this.props;
         if (className == "fas fa-sort-up") {
             sortedMovies = movies.sort((movieObjA, movieObjB) => {
                 return movieObjA.numberInStock - movieObjB.numberInStock;
@@ -52,9 +46,8 @@ export default class MoviesPage extends Component {
                 return movieObjB.numberInStock - movieObjA.numberInStock;
             });
         }
-        this.setState({
-            movies: sortedMovies
-        })
+
+        this.props.setMovies(sortedMovies);
     }
     changelimit = (e) => {
         // console.log("hello");
@@ -71,46 +64,62 @@ export default class MoviesPage extends Component {
             currentPage: pageNumber
         })
     }
-    async componentDidMount() {
-        // console.log(2);
-        let resp = await fetch("https://react-backend101.herokuapp.com/movies");
-        let jsonMovies = await resp.json()
+    groupBygenre = (name) => {
         this.setState({
-            movies: jsonMovies.movies
+            cGenre: name,
+            currSearchText: ""
+        })
+    }
+    async componentDidMount() {
+
+        // console.log(2);
+        let resp = await fetch("https://react-backend101.herokuapp.com/genres");
+        let jsonGenres = await resp.json();
+        this.setState({
+            genres: [...this.state.genres, ...jsonGenres.genres]
         });
     }
     render() {
-        console.log(1);
-        let { movies, currSearchText, limit, currentPage } = this.state;
-        console.log(movies);
-        let filteredArr = movies.filter((movieObj) => {
-            let title = movieObj.title.trim().toLowerCase();
-            // console.log(title);
-            return title.includes(currSearchText.toLowerCase());
-        })
-        if (currSearchText == "") {
-            filteredArr = this.state.movies;
+        console.log("movies");
+        let { currSearchText, limit, currentPage, genres, cGenre } = this.state;
+        let { movies, deleteEntry } = this.props;
+        // console.log(movies);
+        //   genre
+        let filteredArr = movies;
+        if (cGenre != "All Genres") {
+            filteredArr = filteredArr.filter((movieObj) => {
+                return movieObj.genre.name == cGenre;
+            })
         }
+        // search term 
+        if (currSearchText != "") {
+            filteredArr = filteredArr.filter((movieObj) => {
+                let title = movieObj.title.trim().toLowerCase();
+                // console.log(title);
+                return title.includes(currSearchText.toLowerCase());
+            })
+        }
+        // impliment
         // console.log(filteredArr);
         // si -> (pagenumber-1)*limit;
         // eidx = si+limit;
         // number of pages 
+        // paginate 
         let numberofPage = Math.ceil(filteredArr.length / limit);
-        let pageNumberArr = []
-        for (let i = 0; i < numberofPage; i++) {
-            pageNumberArr.push(i + 1);
-        }
-        // impliment
         let si = (currentPage - 1) * limit;
         let eidx = si + limit;
         filteredArr = filteredArr.slice(si, eidx);
         return (
+
             <div className="row">
                 {/* 12 part */}
                 <div className="col-3">
-                    hello
+                    <List genres={genres} groupBygenre={this.groupBygenre}></List>
                 </div>
                 <div className="col-9">
+                    <button className="btn btn-primary">
+                        <Link to="/new" className="text-light" >New </Link>
+                    </button>
                     <input type="search" value={currSearchText}
                         onChange={this.setCurrentText} />
                     <input type="number" className="col-1"
@@ -149,27 +158,17 @@ export default class MoviesPage extends Component {
                                     <td>{movieObj.dailyRentalRate}</td>
                                     <td><button type="button" className="btn btn-danger"
                                         onClick={() => {
-                                            this.deleteEntry(movieObj._id);
+                                            deleteEntry(movieObj._id);
                                         }}>Delete</button></td>
                                 </tr>)
                             })}
                         </tbody>
                     </table>
-                    <nav aria-label="..." className="col-2" >
-                        <ul className="pagination ">
-                            {
-                                pageNumberArr.map((pageNumber) => {
-                                    let additional = pageNumber == currentPage ? "page-item active" : "page-item";
-                                    return (
-                                        <li className={additional}
-                                            aria-current="page" onClick={() => { this.changeCurrentPage(pageNumber) }}>
-                                            <span className="page-link">{pageNumber}</span>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </nav>
+                    <Pagination
+                        numberofPage={numberofPage}
+                        currentPage={currentPage}
+                        changeCurrentPage={this.changeCurrentPage}
+                    ></Pagination>
 
                 </div>
             </div >
@@ -177,3 +176,14 @@ export default class MoviesPage extends Component {
         )
     }
 }
+
+// currentPage
+// this.changeCurrentPage(pageNumber)
+// /function
+// no of pages 
+// current page
+
+// genere array
+// /groupBygenre
+
+
