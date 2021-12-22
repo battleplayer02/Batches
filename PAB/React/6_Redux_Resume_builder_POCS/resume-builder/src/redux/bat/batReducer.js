@@ -1,4 +1,4 @@
-import {Buy_Bat} from "../types";
+import { Buy_Bat } from "../types";
 let initialState = {
     quantity: 20,
     dummyState: "Hello"
@@ -8,14 +8,14 @@ function batReducer(state = initialState, action) {
     switch (action.type) {
         case Buy_Bat:
             // store update
-            console.log(action.payload);
+            // console.log(action.payload);
             let newObject = {
                 ...state,
-                quantity: state.quantity - action.payload,
+                quantity:
+                    state.quantity - action.payload,
             }
             // console.log(newObject);
             return newObject;
-
         default:
             return state;
     }

@@ -21,8 +21,16 @@
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
+
+### Dive Deeper with Promises
 * https://github.com/kriskowal/q/blob/v1/design/README.md
-* https://www.youtube.com/watch?v=fyGSyqEX2dw&t=1311s
+* https://www.promisejs.org/implementing/
+
+## Videos 
+* https://www.youtube.com/watch?v=Em2jqwROdZc
+* https://www.youtube.com/watch?v=4GpwM8FmVgQ  -> Promises implementation
+* https://www.youtube.com/watch?v=Em2jqwROdZc -> async await 
+
 ## Browser
 ### DOM
 * https://developer.mozilla.org/en-US/docs/Web/Events
@@ -38,6 +46,10 @@
 * Document API: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents
 * Files: * https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications#Example_Using_object_URLs_to_display_images * https://stackoverflow.com/questions/12796513/html5-canvas-to-png-file
 * Event Reference : https://developer.mozilla.org/en-US/docs/Web/Events
+
+#### Videos
+* Dom tutorial : https://www.youtube.com/playlist?list=PL4cUxeGkcC9gfoKa5la9dsdCNpuey2s-V
+* Canvas Crash Course: https://youtu.be/Yvz_axxWG4Y
 * Socketio(Ise Pakka dekhna ) : https://www.youtube.com/watch?v=8ARodQ4Wlf4
 ### Camera
 * https://developer.mozilla.org/en-US/docs/Web/API
@@ -64,3 +76,20 @@ https://blog.logrocket.com/the-definitive-guide-to-scss/
 * https://dev.to/unseenwizzard/learn-git-concepts-not-commands-4gjc
 
 
+# Interveiw Questions 
+* https://github.com/sudheerj/reactjs-interview-questions#what-is-redux
+https://github.com/sudheerj/ 
+* javascript-interview-questions#what-are-the-possible-ways-to-create-objects-in-javas
+##  Backend
+* https://mongoosejs.com/docs/queries.html
+### REST API :
+  * video : https://www.youtube.com/watch?v=Q-BpqyOT3a8
+  * https://restfulapi.net/rest-architectural-constraints
+* Request Methods: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+* Res Status:https://www.restapitutorial.com/httpstatuscodes.html
+* MVC: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+### Security :
+* https://en.wikipedia.org/wiki/Bcrypt
+* https://codahale.com/how-to-safely-store-a-password/ => Why is bcrypt imp
+* https://speakerdeck.com/ckarande/top-overlooked-security-threats-to-node-dot-js-web-applications -> what is paramter pollution
+* https://severalnines.com/database-blog/securing-mongodb-external-injection-attacks
